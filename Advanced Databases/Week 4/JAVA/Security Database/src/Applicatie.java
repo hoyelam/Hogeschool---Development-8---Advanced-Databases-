@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class Applicatie {
 	// Connectie variables
 	public static String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
-	public static String username = "postgres";
-	public static String password = "hoye";
+	public static String username = "student_user";
+	public static String password = "1234";
 
 	// SQL Variables
 	public static Statement st1;
@@ -112,7 +112,7 @@ public class Applicatie {
 		}
 	}
 
-	private static void getGegevens_gebruiker() {
+	public static void getGegevens_gebruiker() {
 		String test = ("SELECT * FROM student WHERE studentnummer = '"
 				+ studentnummer + "' AND wachtwoord = '" + wachtwoord + "';");
 		ResultSet z;

