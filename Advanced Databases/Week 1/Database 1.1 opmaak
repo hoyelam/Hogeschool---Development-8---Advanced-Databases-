@@ -1,0 +1,78 @@
+﻿-- Database: "Week1"
+
+--DROP DATABASE "Week1"
+
+drop schema public cascade;
+create schema public;
+
+CREATE DATABASE "Week1"
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'Dutch_Netherlands.1252'
+       LC_CTYPE = 'Dutch_Netherlands.1252'
+       CONNECTION LIMIT = -1;
+
+
+CREATE TABLE Student(
+	  Studentnummer                VARCHAR(7)   NOT NULL  PRIMARY KEY  CHECK (length(Studentnummer) = 7)
+	, Voornaam                     VARCHAR(45)  NOT NULL
+	, Achternaam                   VARCHAR(45)  NOT NULL
+	, Tussenvoegsel                VARCHAR(45)
+	, Geboortedatum                DATE         NOT NULL               CHECK (Geboortedatum <= current_DATE)
+	, Geslacht                     VARCHAR(45)                         CHECK (Geslacht IN ('man', 'vrouw', 'onbekend') 
+	, Straat                       VARCHAR(45)  NOT NULL
+	, Huisnummer                   INT          NOT NULL
+	, Toevoeging                   VARCHAR(1)
+	, Woonplaats                   VARCHAR(45)  NOT NULL
+	, Postcode                     VARCHAR(6)   NOT NULL
+	, Telefoonnummer               VARCHAR(45)  NOT NULL               CHECK (Telefoonnummer~'^[0-9\." "()-]*$') 
+);
+
+CREATE TABLE Docent(
+	  Medewerkerscode              VARCHAR(7)   NOT NULL  PRIMARY KEY  CHECK (Medewerkerscode~'^[0-9A-Z]{7}$')
+	, Voornaam                     VARCHAR(45)  NOT NULL
+	, Achternaam                   VARCHAR(45)  NOT NULL
+	, Tussenvoegsel                VARCHAR(45)
+	, Geboortedatum                DATE         NOT NULL               CHECK (Geboortedatum <= current_DATE)
+	, Geslacht                     VARCHAR(45)                         CHECK (Geslacht IN ('man', 'vrouw', 'onbekend')
+	, Straat                       VARCHAR(45)  NOT NULL
+	, Huisnummer                   INT          NOT NULL
+	, Toevoeging                   VARCHAR(45)
+	, Woonplaats                   VARCHAR(255) NOT NULL
+	, Postcode                     VARCHAR(6)   NOT NULL
+	, Telefoonnummer               VARCHAR(255) NOT NULL               CHECK (Telefoonnummer~'^[0-9\." "()-]*$')
+);
+
+CREATE TABLE Groep(
+	  groepnaam                    VARCHAR(45)  NOT NULL  PRIMARY KEY
+	, startdatum                   DATE         NOT NULL
+	, einddatum                    DATE         NOT NULL               CHECK (einddatum >= startdatum)
+);
+
+CREATE TABLE Groep_has_Student(
+	  Groep_groepnaam              VARCHAR(45)  NOT NULL  REFERENCES Groep(groepnaam)
+	, Student_studentnummer        VARCHAR(7)   NOT NULL  REFERENCES Student(studentnummer)
+);
+
+CREATE TABLE Cursussen(
+	  Cursuscode                   VARCHAR(25)  NOT NULL  PRIMARY KEY  CHECK (Cursuscode = UPPER(Cursuscode))
+	, Cursusbeheerder              VARCHAR(45)  NOT NULL
+	, Omschrijving                 VARCHAR(255) NOT NULL
+	, invoerdatum                  DATE         NOT NULL
+	, Einddatum                    DATE         NOT NULL               CHECK (Einddatum > invoerdatum)
+);
+
+CREATE TABLE Docent_has_Cursussen(
+	  Docent_medewerkerscode       VARCHAR(7)   NOT NULL  REFERENCES Docent(Medewerkerscode)
+	, Cursussen_Cursuscode         VARCHAR(25)  NOT NULL  REFERENCES Cursussen(Cursuscode)
+);
+
+CREATE TABLE Rooster(
+	  groepnaam                    VARCHAR(45)  NOT NULL  REFERENCES Groep(groepnaam)
+	, Lokaal                       VARCHAR(45)  NOT NULL
+	, medewerkerscode              VARCHAR(7)   NOT NULL  REFERENCES Docent(medewerkerscode)
+	, Docent_Cursussen_Cursuscode  VARCHAR(25)  NOT NULL  REFERENCES Cursussen(Cursuscode)
+	, startles                     TIMESTAMP    NOT NULL
+	, eindles                      TIMESTAMP    NOT NULL               CHECK (eindles > startles) 
+);
