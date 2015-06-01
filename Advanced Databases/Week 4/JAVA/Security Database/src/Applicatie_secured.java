@@ -1,17 +1,18 @@
 import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
 import java.util.Scanner;
 
-public class Applicatie {
+
+public class Applicatie_secured {
 	// Connectie variables
 	public static String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
-	public static String username = "student_user";
-	public static String password = "1234";
+	public static String username = "postgres";
+	public static String password = "hoye";
+	public static Connection connection = connect();
 
 	// SQL Variables
 	public static Statement st1;
@@ -90,12 +91,10 @@ public class Applicatie {
 			if (wachtwoord_oud.equals(wachtwoord)) {
 				System.out.println("Voer uw nieuwe wachtwoord in : ");
 				wachtwoord_nieuw = inputReader.nextLine();
-				String wachtwoord_wijzigen = ("UPDATE student SET wachtwoord = '"
-						+ wachtwoord_nieuw
-						+ "' WHERE studentnummer = '"
-						+ studentnummer + "';");
-				System.out.println(wachtwoord_wijzigen);
-				st1.executeUpdate(wachtwoord_wijzigen);
+				PreparedStatement ps = connection.prepareStatement("UPDATE student SET wachtwoord = ? WHERE studentnummer = ?");
+				ps.setString(1, wachtwoord_nieuw);
+				ps.setString(2, studentnummer);
+				ps.executeUpdate();
 				System.out.println("Succes! Uw wachtwoord is gewijzigd! ");
 				opties_gebruiker_ingelogd();
 			}
@@ -110,20 +109,20 @@ public class Applicatie {
 		}
 	}
 
-	public static void getGegevens_gebruiker() {
-		String test = ("SELECT * FROM student WHERE studentnummer = '"
-				+ studentnummer + "' AND wachtwoord = '" + wachtwoord + "';");
-		ResultSet z;
-		System.out.println(test);
-
+	public static void getGegevens_gebruiker() {	
+		ResultSet gegevens_gebruiker;
+	
 		try {
-			z = st1.executeQuery(test);
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM student WHERE studentnummer = ? AND wachtwoord = ?");
+			ps.setString(1, studentnummer);
+			ps.setString(2, wachtwoord);
+			gegevens_gebruiker = ps.executeQuery();
 
-			if (z.next()) {
-				studentnummer = z.getString("studentnummer");
-				naam = z.getString("naam");
-				klas = z.getString("klas");
-				ingeschreven = z.getString("ingeschreven");
+			if (gegevens_gebruiker.next()) {
+				studentnummer = gegevens_gebruiker.getString("studentnummer");
+				naam = gegevens_gebruiker.getString("naam");
+				klas = gegevens_gebruiker.getString("klas");
+				ingeschreven = gegevens_gebruiker.getString("ingeschreven");
 			}
 
 			System.out.println("Student : " + studentnummer);
@@ -139,6 +138,7 @@ public class Applicatie {
 			opties_gebruiker_ingelogd();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Er was iets fouts gegaan probeer het nog is");
 			opties();
 		}
@@ -146,7 +146,6 @@ public class Applicatie {
 
 	// Login
 	public static void login() {
-		Connection connection = connect();
 
 		System.out.println("Voer uw studentnummer in: ");
 		studentnummer = inputReader.nextLine();
@@ -155,13 +154,13 @@ public class Applicatie {
 		wachtwoord = inputReader.nextLine();
 
 		try {
-			st1 = (Statement) connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM student WHERE studentnummer = ? AND wachtwoord = ?");
+			ps.setString(1, studentnummer);
+			ps.setString(2, wachtwoord);
+			
 			ResultSet z;
-			String login_query = ("SELECT * FROM student WHERE studentnummer = '"
-					+ studentnummer + "' AND wachtwoord = '" + wachtwoord + "';");
 
-			System.out.println(login_query);
-			z = st1.executeQuery(login_query);
+			z = ps.executeQuery();
 
 			if (z.next()) {
 				studentnummer = z.getString("studentnummer");
@@ -176,6 +175,7 @@ public class Applicatie {
 			} else {
 				opties_gebruiker_ingelogd();
 			}
+			
 			// terug naar opties
 			opties();
 
@@ -188,8 +188,7 @@ public class Applicatie {
 
 	// Haal data binnen een klas
 	public static void dataKlas() {
-		Connection connection = connect();
-		
+
 		studentnummer = null; 
 		naam = null; 
 		klas = null; 
@@ -200,13 +199,14 @@ public class Applicatie {
 
 		try {
 
-			st1 = (Statement) connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM "+klas+"_view WHERE ingeschreven = 'true'");
 			ResultSet z;
 			
-			String getKlas = ("SELECT * FROM student WHERE klas = '" + klas
-					+ "' AND ingeschreven = 'true';");
-			System.out.println(getKlas);
-			z = st1.executeQuery(getKlas);
+			//String getKlas = ("SELECT * FROM "+klas+" WHERE klas = '" + klas
+			//			+ "' AND ingeschreven = 'true';");
+			//System.out.println(getKlas);
+			System.out.println(ps);
+			z = ps.executeQuery();
 
 			if (z.next()) {
 				studentnummer = z.getString("studentnummer");
@@ -239,7 +239,8 @@ public class Applicatie {
 			opties();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Verkeerde input, probeer het nog is");
+			opties();
 		}
 	}
 

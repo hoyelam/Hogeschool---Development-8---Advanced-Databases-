@@ -7,11 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 public class DataInvoegen {
-	//Connectie Variables
-	public static String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
-	public static String username = "postgres";
-	public static String password = "hoye";
-	
 	//Functie Variables
 	public static Random rand = new Random();
 	
@@ -69,6 +64,8 @@ public class DataInvoegen {
 					e.printStackTrace();
 				}
 			}
+			
+			
 		}, "Thread 1").start();
 	}
 }
