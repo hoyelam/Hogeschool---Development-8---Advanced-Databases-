@@ -16,22 +16,25 @@ GRANT SELECT ON INF4D_view TO student_role;
 CREATE USER student_user WITH PASSWORD '1234';
 GRANT student_role to student_user;
 
-CREATE OR REPLACE VIEW INF1D_view AS
-SELECT * FROM student WHERE klas = 'INF1D';
+DROP VIEW INF0D_view;
+DROP VIEW INF1D_view;
+DROP VIEW INF2D_view;
+DROP VIEW INF3D_view;
+DROP VIEW INF4D_view;
 
+CREATE OR REPLACE VIEW INF0D_view AS
+SELECT studentnummer, naam, klas, ingeschreven FROM student WHERE klas = 'INF0D' AND ingeschreven = 'true';
+
+CREATE OR REPLACE VIEW INF1D_view AS
+SELECT studentnummer, naam, klas, ingeschreven FROM student WHERE klas = 'INF1D' AND ingeschreven = 'true';
 
 CREATE OR REPLACE VIEW INF2D_view AS
-SELECT * FROM student WHERE klas = 'INF2D';
+SELECT studentnummer, naam, klas, ingeschreven FROM student WHERE klas = 'INF2D' AND ingeschreven = 'true';
 
 
 CREATE OR REPLACE VIEW INF3D_view AS
-SELECT * FROM student WHERE klas = 'INF3D';
-
+SELECT studentnummer, naam, klas, ingeschreven FROM student WHERE klas = 'INF3D' AND ingeschreven = 'true';
 
 CREATE OR REPLACE VIEW INF4D_view AS
-SELECT * FROM student WHERE klas = 'INF4D';
-
-
-CREATE OR REPLACE VIEW INF0D_view AS
-SELECT * FROM student WHERE klas = 'INF0D';
+SELECT studentnummer, naam, klas, ingeschreven FROM student WHERE klas = 'INF4D' AND ingeschreven = 'true';
 
