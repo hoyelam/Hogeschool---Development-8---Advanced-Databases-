@@ -17,6 +17,7 @@ COMMENT ON DATABASE postgres
   IS 'default administrative connection database';
 
 CREATE TABLE gebruiker(
+	idGebruiker	INT		NOT NULL 	
 	voornaam	VARCHAR(45)	NOT NULL	
 ,	achternaam	VARCHAR(45)	NOT NULL
 ,	email		VARCHAR(45)	NOT NULL	CHECK (email ~*'^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')	

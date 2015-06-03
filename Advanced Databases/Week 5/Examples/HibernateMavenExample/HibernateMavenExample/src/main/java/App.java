@@ -1,4 +1,4 @@
-import entities.Klas;
+import entities.Gebruiker;
 import entities.Student;
 import org.hibernate.Session;
 
@@ -17,10 +17,10 @@ public class App {
 
     private static void saveStudentKlas(Session session) {
         Student student = new Student("Barack", "Obama");
-        Klas klas = new Klas("inf1a");
-        student.setKlas(klas);
+        Gebruiker test = new Gebruiker("Hoye", "Lam", "bla@bla.nl", "1234");
+        student.setKlas();
 
-        session.save(klas);
+        session.save(student);
         session.save(student);
     }
 
@@ -31,13 +31,5 @@ public class App {
                 .setString(1, "Obama")
                 .list().get(0);
         System.out.println(barack);
-
-
-        if (! barack.getAchternaam().equals("Obama")) {
-            throw new IllegalStateException("Achternaam klopt niet!");
-        }
-        if (! barack.getKlas().getKlasCode().equals("inf1a")) {
-            throw new IllegalStateException("Klas klopt niet");
-        }
     }
 }
