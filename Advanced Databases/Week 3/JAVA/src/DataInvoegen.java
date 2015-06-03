@@ -14,6 +14,8 @@ public class DataInvoegen {
 	public static String username = "postgres";
 	public static String password = "hoye";
 	
+	public static int kans1 = 30;
+	public static int kans2 = 100;
 	
 	public static Random rand = new Random();
 	
@@ -81,7 +83,7 @@ public class DataInvoegen {
 								+ naam
 								+ "' ,'Lam' ,'' , '1996-02-28' ,'man' ,'wijnhaven',106 ,'','Rotterdam','2222AA','0639387945')");
 
-						int n = rand.nextInt(30) + 1;
+						int n = rand.nextInt(kans1) + 1;
 						if (n == 20) {
 							groep.add(klas);
 							st.executeUpdate("INSERT INTO Groep " + "VALUES ('"
@@ -94,7 +96,7 @@ public class DataInvoegen {
 								+ groep.get(rand.nextInt(groep.size()))
 								+ "' ,'" + studentnummer + "')");
 
-						int z = rand.nextInt(30) + 1;
+						int z = rand.nextInt(kans1) + 1;
 						if (z == 20) {
 							module.add(modulenaam);
 							st.executeUpdate("INSERT INTO Cursussen "
@@ -102,7 +104,7 @@ public class DataInvoegen {
 									+ modulenaam
 									+ "', 'TJANG','analyse','2015-05-05', '2016-01-01')");
 							
-							int a = rand.nextInt(100) + 1;
+							int a = rand.nextInt(kans2) + 1;
 							if (a <= 15) {
 								for (int b = 0; b < groep.size(); b++) {
 
@@ -218,7 +220,7 @@ public class DataInvoegen {
 								+ naam
 								+ "' ,'Lam' ,'' , '1996-02-28' ,'man' ,'wijnhaven',106 ,'','Rotterdam','2222AA','0639387945')");
 
-						int n = rand.nextInt(30) + 1;
+						int n = rand.nextInt(kans1) + 1;
 						if (n == 20) {
 							groep.add(klas);
 							st.executeUpdate("INSERT INTO Groep " + "VALUES ('"
@@ -231,14 +233,14 @@ public class DataInvoegen {
 								+ groep.get(rand.nextInt(groep.size()))
 								+ "' ,'" + studentnummer + "')");
 
-						int z = rand.nextInt(30) + 1;
+						int z = rand.nextInt(kans1) + 1;
 						if (z == 20) {
 							module.add(modulenaam);
 							st.executeUpdate("INSERT INTO Cursussen "
 									+ "VALUES ('"
 									+ modulenaam
 									+ "', 'TJANG','analyse','2015-05-05', '2016-01-01')");
-							int a = rand.nextInt(100) + 1;
+							int a = rand.nextInt(kans2) + 1;
 
 							if (a <= 15) {
 								for (int b = 0; b < groep.size(); b++) {
@@ -354,7 +356,7 @@ public class DataInvoegen {
 								+ naam
 								+ "' ,'Lam' ,'' , '1996-02-28' ,'man' ,'wijnhaven',106 ,'','Rotterdam','2222AA','0639387945')");
 
-						int n = rand.nextInt(30) + 1;
+						int n = rand.nextInt(kans1) + 1;
 						if (n == 20) {
 							groep.add(klas);
 							st.executeUpdate("INSERT INTO Groep " + "VALUES ('"
@@ -367,14 +369,14 @@ public class DataInvoegen {
 								+ groep.get(rand.nextInt(groep.size()))
 								+ "' ,'" + studentnummer + "')");
 
-						int z = rand.nextInt(30) + 1;
+						int z = rand.nextInt(kans1) + 1;
 						if (z == 20) {
 							module.add(modulenaam);
 							st.executeUpdate("INSERT INTO Cursussen "
 									+ "VALUES ('"
 									+ modulenaam
 									+ "', 'TJANG','analyse','2015-05-05', '2016-01-01')");
-							int a = rand.nextInt(100) + 1;
+							int a = rand.nextInt(kans2) + 1;
 
 							if (a <= 15) {
 								for (int b = 0; b < groep.size(); b++) {
