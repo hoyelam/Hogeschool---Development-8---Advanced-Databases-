@@ -15,47 +15,66 @@ GRANT CONNECT ON DATABASE postgres TO student_role;
 
 COMMENT ON DATABASE postgres
   IS 'default administrative connection database';
+  
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
-CREATE TABLE gebruiker(
-	idGebruiker	INT		NOT NULL 	
-	voornaam	VARCHAR(45)	NOT NULL	
+CREATE TABLE Gebruiker(
+	idGebruiker	INT		NOT NULL	PRIMARY KEY 	
+,	voornaam	VARCHAR(45)	NOT NULL	
 ,	achternaam	VARCHAR(45)	NOT NULL
 ,	email		VARCHAR(45)	NOT NULL	CHECK (email ~*'^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')	
-,	wachtwoord	VARCHAR(45)	NOT NULL
+,	wachtwoord	VARCHAR(45)	NOT NULL	UNIQUE
 );
 
-CREATE TABLE betalingsGegevens(
-	eigenaarNaam	VARCHAR(45)	NOT NULL
-,	nummer		VARCHAR(12)	NOT NULL	CHECK (nummer~'^[0-9\." "()-]*$')
+CREATE TABLE BetalingsGegevens(
+	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
+,	eigenaarNaam	VARCHAR(45)	NOT NULL
+,	bankNummer	VARCHAR(12)	NOT NULL	PRIMARY KEY	CHECK (bankNummer~'^[0-9\." "()-]*$')
 );
 
-CREATE TABLE iDeal(
+CREATE TABLE IDeal(
+	banknaam	VARCHAR(45)	NOT NULL
+,	bankNummer	VARCHAR(12)	NOT NULL	REFERENCES BetalingsGegevens(bankNummer)
+,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
+);
+
+CREATE TABLE CreditCard(
 	vervalMaand	INT		NOT NULL
 ,	vervalJaar	INT		NOT NULL
+,	bankNummer	VARCHAR(12)	NOT NULL	REFERENCES BetalingsGegevens(bankNummer)
+,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
 );
 
-CREATE TABLE creditCard(
-	banknaam	VARCHAR(45)	NOT NULL
+CREATE TABLE Categorie(
+	categorieNaam	VARCHAR(45)	NOT NULL	PRIMARY KEY
 );
 
-CREATE TABLE advertentie(
-	naam		VARCHAR(255)	NOT NULL
+CREATE TABLE Advertentie(
+	idAdvertentie	INT		NOT NULL	PRIMARY KEY
+,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
+,	naam		VARCHAR(255)	NOT NULL
 ,	beschrijving	TEXT		NOT NULL
 ,	startPrijs	INT		NOT NULL
 ,	actief		BOOLEAN		NOT NULL
 ,	startDatum	DATE		NOT NULL	CHECK (startDatum <= current_DATE)
+,	categorieNaam	VARCHAR(45)	NOT NULL	REFERENCES Categorie(categorieNaam)
 );
 
-CREATE TABLE advertentieReactie(
-	tekts		VARCHAR(255)	NOT NULL
+CREATE TABLE AdvertentieReactie(
+	idAdvertentieReactie	INT	NOT NULL 	PRIMARY KEY	
+,	tekts		VARCHAR(255)	NOT NULL
 ,	datum		DATE		NOT NULL
+,	idAdvertentie	INT		NOT NULL	REFERENCES Advertentie(idAdvertentie)
+,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
 );
 
-CREATE TABLE category(
-	naam		VARCHAR(45)	NOT NULL
-);
 
-CREATE TABLE bod(
-	prijs		INT		NOT NULL
+
+CREATE TABLE Bod(
+	idBod		INT		NOT NULL	PRIMARY KEY
+,	prijs		INT		NOT NULL
 ,	datum		DATE		NOT NULL	CHECK (datum = current_DATE)
+,	idAvertentie	INT		NOT NULL	REFERENCES Advertentie(idAdvertentie)
+,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
 );

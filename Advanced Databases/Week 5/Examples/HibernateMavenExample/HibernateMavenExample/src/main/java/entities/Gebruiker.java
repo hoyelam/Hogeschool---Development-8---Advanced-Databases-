@@ -5,47 +5,75 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class  Gebruiker{
-	
+public class Gebruiker {
+
 	@Id
-    @GeneratedValue
-    private Integer idGebruiker;
-    private String	voornaam;
-    private String	achternaam;
-    private	String	email;
-    private	String	wachtwoord;
+	@GeneratedValue
+	private Integer idGebruiker;
+	private String voornaam;
+	private String achternaam;
+	private String email;
+	private String wachtwoord;
 
-    public Gebruiker() {}
+	public Gebruiker() {
+	}
 
-    public Gebruiker(String voornaam, String achternaam, String email, String wachtwoord) {
-        this();
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
-        this.email = email;
-        this.wachtwoord = wachtwoord;
-    }
+	public Gebruiker(String voornaam, String achternaam, String email,
+			String wachtwoord) {
+		this();
+		this.voornaam = voornaam;
+		this.achternaam = achternaam;
+		this.email = email;
+		this.wachtwoord = wachtwoord;
+	}
+	
+	public void setId(Integer idGebruiker) {
+		this.idGebruiker = idGebruiker;
+	}//Geef een ID aan gebruiker
 
-    public String getVoornaam() {
-        return voornaam;
-    }
+	public Integer getId() {
+		return idGebruiker;
+	}// Haal de ID van gebruiker op
 
-    public void setVoornaam(String voornaam) {
-        this.voornaam = voornaam;
-    }
+	public String getAchternaam(){
+		return achternaam;
+	}//Haal achternaam op
+	
+	public void setAchternaam(String achternaam){
+		this.achternaam = achternaam;
+	}//Set achternaam 
+	
+	public String getVoornaam() {
+		return voornaam;
+	}//Haal voornaam op
 
-    public Integer get_idGebruiker() {
-        return idGebruiker;
-    }
+	public void setVoornaam(String voornaam) {
+		this.voornaam = voornaam;
+	}//Geef gebruiker een voornaam
 
-    public void setId(Integer idGebruiker) {
-        this.idGebruiker = idGebruiker;
-    }
+	public String getEmail(){
+		return email;
+	}
+	
+	public void setEmail(String email){
+		this.email = email;
+	}
 
-    //@Override
-    //public String toString() {
-    //    return "Klas{" +
-    //            "id=" + id +
-    //            ", klasCode='" + klasCode + '\'' +
-    //          '}';
-    //}
+	public void setWachtwoord(String wachtwoord){
+		this.wachtwoord = wachtwoord;
+	}
+	
+	public String getWachtwoord(){
+		return wachtwoord;
+	}
+	
+	
+
+	// @Override
+	// public String toString() {
+	// return "Klas{" +
+	// "id=" + id +
+	// ", klasCode='" + klasCode + '\'' +
+	// '}';
+	// }
 }
