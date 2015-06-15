@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class Applicatie_secured {
 	// Connectie variables
 	public static String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
-	public static String username = "student_user";
-	public static String password = "1234";
+	public static String username = "postgres";
+	public static String password = "hoye";
 	public static Connection connection = connect();
 
 	// SQL Variables
@@ -50,6 +50,7 @@ public class Applicatie_secured {
 
 		opties = inputReader.nextLine();
 
+		
 		if (opties.equals("login")) {
 			login();
 		}

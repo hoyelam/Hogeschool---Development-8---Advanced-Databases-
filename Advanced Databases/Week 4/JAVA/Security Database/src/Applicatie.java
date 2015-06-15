@@ -43,7 +43,6 @@ public class Applicatie {
 
 	// Opties voor wat de gebruiker wilt doen
 	public static void opties() {
-
 		System.out
 				.println("Type 'login' voor inloggen, 'klas' voor klas informatie of 'stop' om de applicatie te stoppen");
 
@@ -61,6 +60,7 @@ public class Applicatie {
 			System.out.println("Verkeerde input, probeer het nog is");
 			opties();
 		}
+		
 	}
 
 	public static void opties_gebruiker_ingelogd() {
@@ -168,14 +168,15 @@ public class Applicatie {
 				naam = z.getString("naam");
 				klas = z.getString("klas");
 				ingeschreven = z.getString("ingeschreven");
-			}
-			if (naam == null) {
-				System.out
-						.println("Geen gebruiker gevonden, probeer het nog is");
-				login();
-			} else {
 				opties_gebruiker_ingelogd();
 			}
+			else{
+				System.out
+						.println("Geen gebruiker gevonden, probeer het nog is");
+				login();				
+			}
+				
+
 			// terug naar opties
 			opties();
 
@@ -225,13 +226,8 @@ public class Applicatie {
 					System.out.println("Student : " + studentnummer);
 					System.out.println("Naam : " + naam);
 					System.out.println("In Klas : " + klas);
-					if (ingeschreven.equals("f")) {
-						System.out.println("is nog niet ingeschreven!");
-						System.out.println("");
-					} else {
-						System.out.println("is ingeschreven!");
-						System.out.println("");
-					}
+					System.out.println (ingeschreven.equals("f") ? "is nog niet ingeschreven!" : "is ingeschreven!");
+					System.out.println("");
 				}
 			} else {
 				System.out.println("Geen klas gevonden, probeer het nog is");
