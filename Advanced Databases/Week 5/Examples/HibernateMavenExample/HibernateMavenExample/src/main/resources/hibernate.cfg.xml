@@ -39,7 +39,6 @@
     -->
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="entities.Gebruiker" />
         <mapping resource="Gebruiker.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>
