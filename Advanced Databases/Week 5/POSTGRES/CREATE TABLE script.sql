@@ -23,8 +23,8 @@ CREATE TABLE Gebruiker(
 	idGebruiker	INT		NOT NULL	PRIMARY KEY 	
 ,	voornaam	VARCHAR(45)	NOT NULL	
 ,	achternaam	VARCHAR(45)	NOT NULL
-,	email		VARCHAR(45)	NOT NULL	CHECK (email ~*'^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')	
-,	wachtwoord	VARCHAR(45)	NOT NULL	UNIQUE
+,	email		VARCHAR(45)	NOT NULL	UNIQUE		CHECK (email ~*'^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')	
+,	wachtwoord	VARCHAR(45)	NOT NULL	
 );
 
 CREATE TABLE BetalingsGegevens(

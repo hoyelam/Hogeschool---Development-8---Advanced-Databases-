@@ -40,5 +40,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping resource="Gebruiker.hbm.xml"></mapping>
+        <mapping resource="BetalingsGegevens.hbm.xml"></mapping>
+        <mapping resource="Advertentie.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

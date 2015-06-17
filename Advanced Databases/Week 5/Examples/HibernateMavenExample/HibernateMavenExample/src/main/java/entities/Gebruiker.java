@@ -14,6 +14,8 @@ public class Gebruiker {
 	private String achternaam;
 	private String email;
 	private String wachtwoord;
+	private BetalingsGegevens betalingsGegevens;
+	private Advertentie advertentie;
 
 	public Gebruiker() {
 	}
@@ -25,6 +27,31 @@ public class Gebruiker {
 		this.achternaam = achternaam;
 		this.email = email;
 		this.wachtwoord = wachtwoord;
+	}
+	
+	public Advertentie getAdvertentie() {
+		return advertentie;
+	}
+
+	public void setAdvertentie(Advertentie advertentie) {
+		this.advertentie = advertentie;
+	}
+
+	
+	public Integer getIdGebruiker() {
+		return idGebruiker;
+	}
+
+	public void setIdGebruiker(Integer idGebruiker) {
+		this.idGebruiker = idGebruiker;
+	}
+
+	public BetalingsGegevens getBetalingsGegevens() {
+		return betalingsGegevens;
+	}
+
+	public void setBetalingsGegevens(BetalingsGegevens betalingsGegevens) {
+		this.betalingsGegevens = betalingsGegevens;
 	}
 	
 	public void setId(Integer idGebruiker) {

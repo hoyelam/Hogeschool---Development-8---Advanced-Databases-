@@ -15,6 +15,10 @@ public class Advertentie {
 	private Integer startPrijs;
 	private boolean actief;
 	private String startDatum;
+	private Integer idGebruiker;
+	private String categorieNaam;
+	private Gebruiker gebruiker;
+
 
 	public Advertentie() {
 	}
@@ -27,6 +31,38 @@ public class Advertentie {
 		this.startPrijs = startPrijs;
 		this.actief = actief;
 		this.startDatum = startDatum;
+	}
+	
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
+	
+	public Integer getIdGebruiker() {
+		return idGebruiker;
+	}
+
+	public void setIdGebruiker(Integer idGebruiker) {
+		this.idGebruiker = idGebruiker;
+	}
+
+	public String getCategorieNaam() {
+		return categorieNaam;
+	}
+
+	public void setCategorieNaam(String categorieNaam) {
+		this.categorieNaam = categorieNaam;
+	}
+
+	public Integer getIdAdvertentie() {
+		return idAdvertentie;
+	}
+
+	public void setIdAdvertentie(Integer idAdvertentie) {
+		this.idAdvertentie = idAdvertentie;
 	}
 
 	public Integer getId() {

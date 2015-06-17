@@ -6,8 +6,7 @@
 <hibernate-mapping >
    <class name="entities.Advertentie" table="Advertentie">
       <meta attribute="class-description">
-
-         This class contains the employee detail. 
+         This class contains the advertentie detail. 
       </meta>
       <id name="id" type="int" column="idAdvertentie">
          <generator class="native"/>
@@ -17,6 +16,9 @@
       <property name="startPrijs" column="startPrijs" type="int"/>
       <property name="actief" column="actief" type="boolean"/>
       <property name="startDatum" column="startDatum" type="date"/>
+      <many-to-one name="idGebruiker" class="entities.Gebruiker" fetch="select">
+      	<column name="idGebruiker" not-null="true"></column>
+      </many-to-one>
    </class>
    
    

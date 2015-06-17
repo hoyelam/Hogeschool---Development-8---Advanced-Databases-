@@ -24,7 +24,7 @@ public class App {
 
 		session.getTransaction().commit();
 
-		Integer idGebruiker1 = ME.addGebruiker("hoye", "lam", "bla@bla.nl", "1234");
+		Integer idGebruiker1 = ME.addGebruiker("hoye", "lam", "bl234a@bla.nl", "1234");
 		HibernateUtil.getSessionFactory().close();
 	}
 
@@ -46,5 +46,4 @@ public class App {
 		}
 		return idGebruiker;
 	}
-
 }
