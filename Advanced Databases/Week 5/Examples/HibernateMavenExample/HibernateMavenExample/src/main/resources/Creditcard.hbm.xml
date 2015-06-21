@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entities.Creditcard" table="Creditcard">
+		<meta attribute="class-description">
+			This class contains the creditcard detail.
+		</meta>
+		<id name="BetalingsGegevens" type="integer">
+			<column name="bankNummer" />
+			<generator class="foreign">
+				<param name="property">bankNummer</param>
+			</generator>
+		</id>
+		<one-to-one name="bankNummer" class="entities.BetalingsGegevens"
+			constrained="true">
+		</one-to-one>			
+		<property name="vervalMaand" column="vervalMaand" type="integer"></property>
+		<property name="vervalJaar" column="vervalJaar" type="integer"></property>
+		
+	</class>
+</hibernate-mapping>

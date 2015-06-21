@@ -42,5 +42,12 @@
         <mapping resource="Gebruiker.hbm.xml"></mapping>
         <mapping resource="BetalingsGegevens.hbm.xml"></mapping>
         <mapping resource="Advertentie.hbm.xml"></mapping>
+        <mapping resource="Creditcard.hbm.xml"></mapping>
+        <mapping resource="iDeal.hbm.xml"></mapping>
+        <mapping resource="AdvertentieReactie.hbm.xml"></mapping>
+        <mapping resource="Categorie.hbm.xml"></mapping>
+        <mapping resource="Bod.hbm.xml"></mapping>
+        
+        
     </session-factory>
 </hibernate-configuration>

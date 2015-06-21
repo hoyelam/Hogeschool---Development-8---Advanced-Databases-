@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping >
+   <class name="entities.iDeal" table="iDeal">
+      <meta attribute="class-description">
+         This class contains the iDeal detail. 
+      </meta>
+      <id name="id" type="int" column="idGebruiker">
+         <generator class="native"/>
+      </id>
+      <one-to-one name="betalingsGegevens" class="entities.BetalingsGegevens" cascade="save-update"></one-to-one>
+     <set name="Advertentie" table="Advertentie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idAdvertentie" not-null="true">
+            </column></key>
+            <one-to-many class="entities.Advertentie"></one-to-many></set>
+      <property name="bankNaam" column="bankNaam" type="string"/>
+   </class>
+</hibernate-mapping>
+<!--  -->

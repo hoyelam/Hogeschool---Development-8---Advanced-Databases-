@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entities.Bod" table="Bod">
+		<meta attribute="class-description">
+			This class contains the Bod detail.
+		</meta>
+		<id name="Bod" type="integer">
+			<column name="idBod" />
+			<generator class="native">
+			</generator>
+		</id>
+		 <many-to-one name="Advertentie" class="entities.Advertentie" fetch="select">
+      	<column name="idAdvertentie" not-null="true"></column>
+      </many-to-one>
+		
+		<property name="prijs" column="prijs" type="integer"></property>
+		<property name="datum" column="datum" type="string"></property>
+		
+	</class>
+</hibernate-mapping>

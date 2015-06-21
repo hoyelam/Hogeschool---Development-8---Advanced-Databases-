@@ -11,15 +11,34 @@
       <id name="id" type="int" column="idAdvertentie">
          <generator class="native"/>
       </id>
+      
       <property name="naam" column="naam" type="string"/>
       <property name="beschrijving" column="beschrijving" type="string"/>
       <property name="startPrijs" column="startPrijs" type="int"/>
       <property name="actief" column="actief" type="boolean"/>
       <property name="startDatum" column="startDatum" type="date"/>
+      
       <many-to-one name="idGebruiker" class="entities.Gebruiker" fetch="select">
       	<column name="idGebruiker" not-null="true"></column>
       </many-to-one>
+      
+      <set name="Bod" table="Bod" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idBod" not-null="true"></column>
+            </key>
+            <one-to-many class="entities.Bod"></one-to-many>
+      </set>
+      
+      <many-to-one name="Categorie" class="entities.Categorie" fetch="select">
+      	<column name="categorieNaam" not-null="true"></column>
+      </many-to-one>
+      
+       <set name="AdvertentieReactie" table="AdvertentieReactie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idAdvertentie" not-null="true"></column>
+            </key>
+            <one-to-many class="entities.AdvertentieReactie"></one-to-many>
+      </set>
+                        
    </class>
-   
-   
 </hibernate-mapping>
