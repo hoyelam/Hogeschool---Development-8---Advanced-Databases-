@@ -1,89 +1,47 @@
 package entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Advertentie")
 public class Advertentie {
-	@Id
-	@GeneratedValue
+
 	private Integer idAdvertentie;
 	private String naam;
 	private String beschrijving;
 	private Integer startPrijs;
 	private boolean actief;
 	private String startDatum;
-	private Integer idGebruiker;
-	private String categorieNaam;
+	//private Integer idGebruiker;
+	//private String categorieNaam;
 	private Gebruiker gebruiker;
-	private Bod bod;
-	private Categorie categorie;
-	private AdvertentieReactie advertentieReactie;
-
-
-	public AdvertentieReactie getAdvertentieReactie() {
-		return advertentieReactie;
-	}
-
-	public void setAdvertentieReactie(AdvertentieReactie advertentieReactie) {
-		this.advertentieReactie = advertentieReactie;
-	}
-
-	public Categorie getCategorie() {
-		return categorie;
-	}
-
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
-
-	public Bod getBod() {
-		return bod;
-	}
-
-	public void setBod(Bod bod) {
-		this.bod = bod;
-	}
-
+	//private Bod bod;
+    private Categorie categorie;
+	//private AdvertentieReactie advertentieReactie;
+	
 	public Advertentie() {
 	}
 
 	public Advertentie(String naam, String beschrijving, Integer startPrijs,
-			boolean actief, String startDatum) {
+			boolean actief, String startDatum, Gebruiker gebruiker, Categorie categorie) {
 		this();
 		this.naam = naam;
 		this.beschrijving = beschrijving;
 		this.startPrijs = startPrijs;
 		this.actief = actief;
 		this.startDatum = startDatum;
-	}
-	
-	public Gebruiker getGebruiker() {
-		return gebruiker;
-	}
-
-	public void setGebruiker(Gebruiker gebruiker) {
 		this.gebruiker = gebruiker;
+		this.categorie = categorie;
 	}
-	
-	public Integer getIdGebruiker() {
-		return idGebruiker;
-	}
-
-	public void setIdGebruiker(Integer idGebruiker) {
-		this.idGebruiker = idGebruiker;
-	}
-
-	public String getCategorieNaam() {
-		return categorieNaam;
-	}
-
-	public void setCategorieNaam(String categorieNaam) {
-		this.categorieNaam = categorieNaam;
-	}
-
+	@Id
+	@GeneratedValue
+	@Column(name="idAdvertentie")
 	public Integer getIdAdvertentie() {
 		return idAdvertentie;
 	}
@@ -92,14 +50,7 @@ public class Advertentie {
 		this.idAdvertentie = idAdvertentie;
 	}
 
-	public Integer getId() {
-		return idAdvertentie;
-	}
-
-	public void setId(Integer idAdvertentie) {
-		this.idAdvertentie = idAdvertentie;
-	}
-
+	@Column(name="naam")
 	public String getNaam() {
 		return naam;
 	}
@@ -108,6 +59,7 @@ public class Advertentie {
 		this.naam = naam;
 	}
 
+	@Column(name="beschrijving")
 	public String getBeschrijving() {
 		return beschrijving;
 	}
@@ -116,6 +68,7 @@ public class Advertentie {
 		this.beschrijving = beschrijving;
 	}
 
+	@Column(name="startPrijs")
 	public Integer getStartPrijs() {
 		return startPrijs;
 	}
@@ -124,20 +77,41 @@ public class Advertentie {
 		this.startPrijs = startPrijs;
 	}
 
-	public void setStartDatum(String startDatum) {
-		this.startDatum = startDatum;
-	}
-
-	public String getStartDatum() {
-		return startDatum;
-	}
-	
-	public void setActief(boolean actief){
-		this.actief = actief;
-	}
-	
-	public boolean getActief(){
+	@Column(name="actief")
+	public boolean isActief() {
 		return actief;
 	}
 
+	public void setActief(boolean actief) {
+		this.actief = actief;
+	}
+
+	@Column(name="startDatum")
+	public String getStartDatum() {
+		return startDatum;
+	}
+
+	public void setStartDatum(String startDatum) {
+		this.startDatum = startDatum;
+	}
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+	
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	
 }

@@ -1,94 +1,79 @@
 package entities;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Bod")
 public class Bod {
-	@Id
-	@GeneratedValue
+	
 	private Integer idBod;
 	private Integer prijs;
 	private String datum;
-	private Integer idAdvertentie;
-	private Integer idGebruiker;
 	private Advertentie advertentie;
-	private Bod bod;
+	private Gebruiker gebruiker;
 
-	public Bod(Integer idBod, Integer prijs, String datum, Integer idAdvertentie,
-			Integer idGebruiker){
+	public Bod() {
+	}
+	
+	public Bod(Integer prijs, String datum, Advertentie advertentie,
+				Gebruiker gebruiker){
 		this();
-		this.idBod = idBod;
 		this.prijs = prijs;
 		this.datum = datum;
-		this.idAdvertentie = idAdvertentie;
-		this.idGebruiker = idGebruiker;
+		this.advertentie = advertentie;
+		this.gebruiker = gebruiker;
 	}
-	public Bod getBod() {
-		return bod;
-	}
-	public void setBod(Bod bod) {
-		this.bod = bod;
-	}
+
+	@Id
+	@GeneratedValue
+	@Column(name="idBod")
 	public Integer getIdBod() {
 		return idBod;
 	}
-
 
 	public void setIdBod(Integer idBod) {
 		this.idBod = idBod;
 	}
 
-
+	@Column(name="prijs")
 	public Integer getPrijs() {
 		return prijs;
 	}
-
 
 	public void setPrijs(Integer prijs) {
 		this.prijs = prijs;
 	}
 
-
+	@Column(name="datum")
 	public String getDatum() {
 		return datum;
 	}
-
 
 	public void setDatum(String datum) {
 		this.datum = datum;
 	}
 
-
-	public Integer getIdAdvertentie() {
-		return idAdvertentie;
-	}
-
-
-	public void setIdAdvertentie(Integer idAdvertentie) {
-		this.idAdvertentie = idAdvertentie;
-	}
-
-
-	public Integer getIdGebruiker() {
-		return idGebruiker;
-	}
-
-
-	public void setIdGebruiker(Integer idGebruiker) {
-		this.idGebruiker = idGebruiker;
-	}
-
-
+	@ManyToOne (cascade = CascadeType.ALL)
 	public Advertentie getAdvertentie() {
 		return advertentie;
 	}
-
 
 	public void setAdvertentie(Advertentie advertentie) {
 		this.advertentie = advertentie;
 	}
 
+	@ManyToOne (cascade = CascadeType.ALL)
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
 
-	public Bod() {
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
 	}
 }
