@@ -8,15 +8,14 @@
       <meta attribute="class-description">
          This class contains the iDeal detail. 
       </meta>
-      <id name="id" type="int" column="idGebruiker">
-         <generator class="native"/>
-      </id>
+      <id name="Gebruiker" type="integer">
+			<column name="idGebruiker" />
+			<generator class="foreign">
+				<param name="property">gebruiker</param>
+			</generator>
+		</id>
       <one-to-one name="betalingsGegevens" class="entities.BetalingsGegevens" cascade="save-update"></one-to-one>
-     <set name="Advertentie" table="Advertentie" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idAdvertentie" not-null="true">
-            </column></key>
-            <one-to-many class="entities.Advertentie"></one-to-many></set>
+   
       <property name="bankNaam" column="bankNaam" type="string"/>
    </class>
 </hibernate-mapping>

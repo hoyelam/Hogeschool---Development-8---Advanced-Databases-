@@ -8,7 +8,7 @@
       <meta attribute="class-description">
          This class contains the advertentie detail. 
       </meta>
-      <id name="id" type="int" column="idAdvertentie">
+      <id name="idAdvertentie" type="int" column="idAdvertentie">
          <generator class="native"/>
       </id>
       
@@ -16,7 +16,7 @@
       <property name="beschrijving" column="beschrijving" type="string"/>
       <property name="startPrijs" column="startPrijs" type="int"/>
       <property name="actief" column="actief" type="boolean"/>
-      <property name="startDatum" column="startDatum" type="date"/>
+      <property name="startDatum" column="startDatum" type="string"/>
       
       <many-to-one name="idGebruiker" class="entities.Gebruiker" fetch="select">
       	<column name="idGebruiker" not-null="true"></column>
@@ -24,18 +24,18 @@
       
       <set name="Bod" table="Bod" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idBod" not-null="true"></column>
+                <column name="idBod" not-null="false"></column>
             </key>
             <one-to-many class="entities.Bod"></one-to-many>
       </set>
       
       <many-to-one name="Categorie" class="entities.Categorie" fetch="select">
-      	<column name="categorieNaam" not-null="true"></column>
+      	<column name="categorieNaam" not-null="false"></column>
       </many-to-one>
       
        <set name="AdvertentieReactie" table="AdvertentieReactie" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="idAdvertentie" not-null="true"></column>
+                <column name="idAdvertentie" not-null="false"></column>
             </key>
             <one-to-many class="entities.AdvertentieReactie"></one-to-many>
       </set>

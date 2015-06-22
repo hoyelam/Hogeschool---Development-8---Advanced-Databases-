@@ -4,25 +4,26 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
 <hibernate-mapping >
-   <class name="entities.Gebruiker" table="gebruiker">
+   <class name="entities.Gebruiker" table="Gebruiker">
       <meta attribute="class-description">
-         This class contains the employee detail. 
+         This class contains the gebruiker detail. 
       </meta>
-      <id name="id" type="int" column="idGebruiker">
+      <id name="idGebruiker" type="int" column="idGebruiker">
          <generator class="native"/>
       </id>
       <one-to-one name="betalingsGegevens" class="entities.BetalingsGegevens" cascade="save-update"></one-to-one>
+      
      <set name="Advertentie" table="Advertentie" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="idAdvertentie" not-null="true">
             </column></key>
-            <one-to-many class="entities.Advertentie"></one-to-many></set>
+            <one-to-many class="entities.Advertentie"></one-to-many>
+     </set>            
+     
       <property name="voornaam" column="voornaam" type="string"/>
       <property name="achternaam" column="achternaam" type="string"/>
       <property name="email" column="email" type="string"/>
       <property name="wachtwoord" column="wachtwoord" type="string"/>
-   </class>
-   
-  
+    </class>
 </hibernate-mapping>
 <!--  -->

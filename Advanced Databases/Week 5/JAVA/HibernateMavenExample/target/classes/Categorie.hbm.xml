@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping >
+   <class name="entities.Categorie" table="Categorie">
+      <meta attribute="class-description">
+         This class contains the Categorie detail. 
+      </meta>
+      <id name="Categorie" type="string" column="categorieNaam">
+         <generator class="native"/>
+      </id>
+      
+       <set name="Categorie" table="AdvertentieReactie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="categorieNaam" not-null="true"></column>
+            </key>
+            <one-to-many class="entities.Advertentie"></one-to-many>
+      </set>
+                        
+   </class>
+</hibernate-mapping>

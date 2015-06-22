@@ -8,20 +8,16 @@
       <meta attribute="class-description">
          This class contains the AdvertentieReactie detail. 
       </meta>
-      <id name="id" type="int" column="idGebruiker">
+      <id name="idAdvertentieReactie" type="int" column="idAdvertentieReactie">
          <generator class="native"/>
       </id>
-      <one-to-one name="betalingsGegevens" class="entities.BetalingsGegevens" cascade="save-update"></one-to-one>
-     <set name="Advertentie" table="Advertentie" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="idAdvertentie" not-null="true">
-            </column></key>
-            <one-to-many class="entities.Advertentie"></one-to-many></set>
-      <property name="voornaam" column="voornaam" type="string"/>
-      <property name="achternaam" column="achternaam" type="string"/>
-      <property name="email" column="email" type="string"/>
-      <property name="wachtwoord" column="wachtwoord" type="string"/>
+      
+       <many-to-one name="Advertentie" class="entities.Advertentie" fetch="select">
+      	<column name="idAdvertentie" not-null="true"></column>
+      </many-to-one>
+
+      <property name="tekst" column="tekst" type="string"/>
+      <property name="datum" column="datum" type="string"/>
    </class>
    
-  
 </hibernate-mapping>
