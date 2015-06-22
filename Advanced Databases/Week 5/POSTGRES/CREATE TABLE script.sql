@@ -78,3 +78,5 @@ CREATE TABLE Bod(
 ,	idAvertentie	INT		NOT NULL	REFERENCES Advertentie(idAdvertentie)
 ,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
 );
+
+SELECT * FROM Gebruiker;
