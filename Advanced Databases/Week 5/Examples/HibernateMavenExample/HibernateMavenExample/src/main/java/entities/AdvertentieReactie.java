@@ -1,21 +1,21 @@
 package entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="AdvertentieReactie")
 public class AdvertentieReactie {
-	@Id
-	@GeneratedValue
 	private Integer idAdvertentieReactie;
 	private String tekst;
 	private String datum;
-	private Integer idAdvertentie ;
-	private String categorieNaam;	
-	private Integer idGebruiker;
 	private Advertentie advertentie;
-	private Gebruiker gebruiker; 
-	private Categorie categorie;
+	private Gebruiker gebruiker;
 
+	
 	public AdvertentieReactie() {
 	}
 
@@ -23,9 +23,11 @@ public class AdvertentieReactie {
 		this();
 		this.tekst = tekst;
 		this.datum = datum;
-		this.idAdvertentie = idAdvertentie;
 	}
 	
+	@Id
+	@GeneratedValue
+	@Column(name="idAdvertentie")
 	public Integer getIdAdvertentieReactie() {
 		return idAdvertentieReactie;
 	}
@@ -34,6 +36,7 @@ public class AdvertentieReactie {
 		this.idAdvertentieReactie = idAdvertentieReactie;
 	}
 
+	@Column(name="tekst")
 	public String getTekst() {
 		return tekst;
 	}
@@ -42,36 +45,13 @@ public class AdvertentieReactie {
 		this.tekst = tekst;
 	}
 
+	@Column(name="datum")
 	public String getDatum() {
 		return datum;
 	}
 
 	public void setDatum(String datum) {
 		this.datum = datum;
-	}
-
-	public Integer getIdAdvertentie() {
-		return idAdvertentie;
-	}
-
-	public void setIdAdvertentie(Integer idAdvertentie) {
-		this.idAdvertentie = idAdvertentie;
-	}
-
-	public String getCategorieNaam() {
-		return categorieNaam;
-	}
-
-	public void setCategorieNaam(String categorieNaam) {
-		this.categorieNaam = categorieNaam;
-	}
-
-	public Integer getIdGebruiker() {
-		return idGebruiker;
-	}
-
-	public void setIdGebruiker(Integer idGebruiker) {
-		this.idGebruiker = idGebruiker;
 	}
 
 	public Advertentie getAdvertentie() {
@@ -89,14 +69,5 @@ public class AdvertentieReactie {
 	public void setGebruiker(Gebruiker gebruiker) {
 		this.gebruiker = gebruiker;
 	}
-
-	public Categorie getCategorie() {
-		return categorie;
-	}
-
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
-
 	
 }

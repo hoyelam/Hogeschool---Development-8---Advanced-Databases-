@@ -126,7 +126,32 @@ public class App {
 		} finally{
 			session.close();
 		}
+		
 	}
+	
+	public void actie4(){
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Categorie categorie= new Categorie("SmartPhones");
+			Categorie subCategorie = new Categorie("Apple");
+			Advertentie advertentie1 = new Advertentie("iPhone", "mooi", 78, true, "22-06-2015", gebruiker, subCategorie);
+					
+			subCategorie.setSubCategorie(categorie);
+			session.save(advertentie1);
+			session.save(subCategorie);			
+			tx.commit();			
+		} catch (HibernateException e) {
+			if (tx != null) {
+				e.printStackTrace();
+			}
+		} finally{
+			session.close();
+		}		
+	}
+	
+	
 	public void addGebruiker(String voornaam, String achternaam,String email, String wachtwoord) {
 		Session session = factory.openSession();
 		Transaction tx = null;
