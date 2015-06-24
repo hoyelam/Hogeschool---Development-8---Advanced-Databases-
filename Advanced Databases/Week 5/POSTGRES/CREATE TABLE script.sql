@@ -79,4 +79,4 @@ CREATE TABLE Bod(
 ,	idGebruiker	INT		NOT NULL	REFERENCES Gebruiker(idGebruiker)
 );
 
-SELECT * FROM Gebruiker;
+SELECT * FROM BetalingsGegevens;
