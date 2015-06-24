@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 public class AdvertentieReactie {
 	private Integer idAdvertentieReactie;
 	private String tekst;
-	private String datum;
+	private Date datum;
 	private Advertentie advertentie;
 	private Gebruiker gebruiker;
 
@@ -21,10 +23,10 @@ public class AdvertentieReactie {
 	public AdvertentieReactie() {
 	}
 
-	public AdvertentieReactie(String tekst, String datum, Advertentie advertentie, Gebruiker gebruiker) {
+	public AdvertentieReactie(String tekst, Advertentie advertentie, Gebruiker gebruiker) {
 		this();
 		this.tekst = tekst;
-		this.datum = datum;
+		this.datum = new Date();
 		this.advertentie = advertentie;
 		this.gebruiker = gebruiker;
 	}
@@ -50,11 +52,11 @@ public class AdvertentieReactie {
 	}
 
 	@Column(name="datum")
-	public String getDatum() {
+	public Date getDatum() {
 		return datum;
 	}
 
-	public void setDatum(String datum) {
+	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
 

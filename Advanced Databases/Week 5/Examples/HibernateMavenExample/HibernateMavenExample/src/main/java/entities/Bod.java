@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,18 +16,18 @@ public class Bod {
 	
 	private Integer idBod;
 	private Integer prijs;
-	private String datum;
+	private Date datum;
 	private Advertentie advertentie;
 	private Gebruiker gebruiker;
 
 	public Bod() {
 	}
 	
-	public Bod(Integer prijs, String datum, Advertentie advertentie,
+	public Bod(Integer prijs, Advertentie advertentie,
 				Gebruiker gebruiker){
 		this();
 		this.prijs = prijs;
-		this.datum = datum;
+		this.datum = new Date();
 		this.advertentie = advertentie;
 		this.gebruiker = gebruiker;
 	}
@@ -51,11 +53,11 @@ public class Bod {
 	}
 
 	@Column(name="datum")
-	public String getDatum() {
+	public Date getDatum() {
 		return datum;
 	}
 
-	public void setDatum(String datum) {
+	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
 

@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +20,7 @@ public class Advertentie {
 	private String beschrijving;
 	private Integer startPrijs;
 	private boolean actief;
-	private String startDatum;
+	private Date startDatum;
 	private Gebruiker gebruiker;
     private Categorie categorie;
 	
@@ -26,13 +28,13 @@ public class Advertentie {
 	}
 
 	public Advertentie(String naam, String beschrijving, Integer startPrijs,
-			boolean actief, String startDatum, Gebruiker gebruiker, Categorie categorie) {
+			boolean actief, Gebruiker gebruiker, Categorie categorie) {
 		this();
 		this.naam = naam;
 		this.beschrijving = beschrijving;
 		this.startPrijs = startPrijs;
 		this.actief = actief;
-		this.startDatum = startDatum;
+		this.startDatum = new Date();
 		this.gebruiker = gebruiker;
 		this.categorie = categorie;
 	}
@@ -84,11 +86,11 @@ public class Advertentie {
 	}
 
 	@Column(name="startDatum")
-	public String getStartDatum() {
+	public Date getStartDatum() {
 		return startDatum;
 	}
 
-	public void setStartDatum(String startDatum) {
+	public void setStartDatum(Date startDatum) {
 		this.startDatum = startDatum;
 	}
 	
