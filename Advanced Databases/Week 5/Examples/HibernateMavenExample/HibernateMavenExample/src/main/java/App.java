@@ -9,8 +9,6 @@ import org.hibernate.dialect.PostgreSQLDialect;
 
 public class App {
 	private static SessionFactory factory;
-	Gebruiker gebruiker = new Gebruiker("hoye", "lam", "bla@bla.nl", "1234");
-	Categorie categorie = new Categorie("SmartPhones");
 	public static void main(String[] args) {
 		 try{
 	         factory = new Configuration().configure().buildSessionFactory();
@@ -25,23 +23,25 @@ public class App {
 
 		session.getTransaction().commit();
 
-		//ME.actie1();
-		
-		ME.actie3();
-		//ME.addGebruiker("hoye", "lam", "bl23s4a@bla.nl", "1234");
-		//ME.PlaatsAdvertentie("gratis iPhone", "mooi ding", 97, true, "28-11-15");
-		
+		ME.actie1();// Voer scenario 1
+		ME.actie2();// Voer scenario 2
+		ME.actie3();// Voer scenario 3
+		ME.actie4();// Voer scenario 4
 		
 		HibernateUtil.getSessionFactory().close();
 	}
 	
+	//Scenario 1 maak gebruiker en dat gebruiker maakt een advertentie
 	public void actie1(){
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
+			Gebruiker gebruiker = new Gebruiker("hoye", "lam", "bla@bla.nl", "1234");
+			Categorie categorie = new Categorie("SmartPhones");
 			Advertentie advertentie1 = new Advertentie("iPhone", "mooi", 78, true, "22-06-2015", gebruiker, categorie);
 			session.save(advertentie1);
+			session.save(categorie);
 			session.save(gebruiker);
 			tx.commit();
 		} catch (HibernateException e) {
@@ -53,25 +53,24 @@ public class App {
 		}
 	}
 	
+	//Scenario 2 meerdere gebruikers bieden op de advertentie
 	public void actie2(){
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Gebruiker gebruiker1 = new Gebruiker("Hoye", "Lam", "bl1a@bla.nl", "1234");
+			Advertentie advertentie1 = (Advertentie) session.load(Advertentie.class, 1);
 			Gebruiker gebruiker2 = new Gebruiker ("Rinesh" , "Ramadhin", "Rinesh@rinshesh.nl", "1234");
 			Gebruiker gebruiker3 = new Gebruiker("Ho Ye", "lam", "bla123@bla.nl", "1234");
 			Gebruiker gebruiker4 = new Gebruiker("John", "Mata", "bla21412@bla.nl", "1234");
-			Advertentie advertentie1 = new Advertentie("iPhone", "mooi", 78, true, "22-06-2015", gebruiker1, categorie);
+			
 			Bod bod1 = new Bod(70,"21-06-2015",advertentie1, gebruiker2);
 			Bod bod2 = new Bod(80,"22-06-2015",advertentie1, gebruiker3);
 			Bod bod3 = new Bod(50,"23-06-2015",advertentie1, gebruiker4);
 
-			session.save(gebruiker1);
 			session.save(gebruiker2);
 			session.save(gebruiker3);
 			session.save(gebruiker4);
-			session.save(advertentie1);
 			session.save(bod1);
 			session.save(bod2);
 			session.save(bod3);
@@ -111,35 +110,10 @@ public class App {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Categorie categorie= new Categorie("SmartPhones");
+			Categorie categorie = (Categorie) session.load(Categorie.class, 1);
 			Categorie subCategorie = new Categorie("Apple");
-			Advertentie advertentie1 = new Advertentie("iPhone", "mooi", 78, true, "22-06-2015", gebruiker, subCategorie);
-					
-			subCategorie.setSubCategorie(categorie);
-			session.save(advertentie1);
-			session.save(subCategorie);			
-			tx.commit();			
-		} catch (HibernateException e) {
-			if (tx != null) {
-				e.printStackTrace();
-			}
-		} finally{
-			session.close();
-		}
-		
-	}
-	
-	public void actie4(){
-		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Categorie categorie= new Categorie("SmartPhones");
-			Categorie subCategorie = new Categorie("Apple");
-			Advertentie advertentie1 = new Advertentie("iPhone", "mooi", 78, true, "22-06-2015", gebruiker, subCategorie);
-					
-			subCategorie.setSubCategorie(categorie);
-			session.save(advertentie1);
+			Advertentie advertentie1 = (Advertentie) session.load(Advertentie.class, 3);
+			subCategorie.setParentCategorie(categorie);
 			session.save(subCategorie);			
 			tx.commit();			
 		} catch (HibernateException e) {
@@ -151,38 +125,37 @@ public class App {
 		}		
 	}
 	
-	
-	public void addGebruiker(String voornaam, String achternaam,String email, String wachtwoord) {
+	public void actie4(){
 		Session session = factory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Gebruiker gebruiker = new Gebruiker(voornaam, achternaam,email,wachtwoord);
-			session.save(gebruiker);
-			tx.commit();
+			Gebruiker gebruiker = (Gebruiker) session.load(Gebruiker.class, 1);
+			Gebruiker gebruiker2 = (Gebruiker) session.load(Gebruiker.class, 2);
+			Gebruiker gebruiker3 = (Gebruiker) session.load(Gebruiker.class, 3);
+			Gebruiker gebruiker4 = (Gebruiker) session.load(Gebruiker.class, 4);
+			
+			Categorie categorie= new Categorie("Laptop");
+			Categorie subCategorie = new Categorie("MSI");
+			subCategorie.setParentCategorie(categorie);
+			Advertentie advertentie2 = new Advertentie("MSI Laptop", "Goede staat", 500, true, "24-06-2015", gebruiker, categorie);
+			
+			AdvertentieReactie advertentieReactie1 = new AdvertentieReactie("meer informatie graag", "26-06-2014", advertentie2, gebruiker2);
+			AdvertentieReactie advertentieReactie2 = new AdvertentieReactie("Is het beeldscherm mooi genoeg?", "26-06-2014", advertentie2, gebruiker3);
+			AdvertentieReactie advertentieReactie3 = new AdvertentieReactie("Is het beschadigd ergens?", "26-06-2014", advertentie2, gebruiker4);
+			
+			session.save(subCategorie);
+			session.save(advertentieReactie1);
+			session.save(advertentieReactie2);
+			session.save(advertentieReactie3);
+			tx.commit();			
+			
 		} catch (HibernateException e) {
 			if (tx != null) {
 				e.printStackTrace();
 			}
 		} finally{
 			session.close();
-		}
-	}
-	
-	public void PlaatsAdvertentie(String naam, String beschrijving, Integer startPrijs, Boolean actief, String startDatum) {
-		Session session = factory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null) {
-				e.printStackTrace();
-			}
-		} finally{
-			session.close();
-		}
-
+		}		
 	}
 }

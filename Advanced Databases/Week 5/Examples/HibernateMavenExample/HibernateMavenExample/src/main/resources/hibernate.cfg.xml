@@ -44,6 +44,7 @@
 		<mapping class="entities.Bod"></mapping>
 		<mapping class="entities.BetalingsGegevens"></mapping>
 		<mapping class="entities.Categorie"></mapping>
+		<mapping class="entities.AdvertentieReactie"></mapping>
 <!--  
         <mapping resource="Gebruiker.hbm.xml"></mapping>
         <mapping resource="BetalingsGegevens.hbm.xml"></mapping>

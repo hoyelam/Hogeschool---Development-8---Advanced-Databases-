@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,8 +19,6 @@ public class Gebruiker {
 	private String email;
 	private String wachtwoord;
 	private BetalingsGegevens betalingsGegevens;
-	private Advertentie advertentie;
-	private Integer idAdvertentie;
 
 	public Gebruiker() {
 	}
@@ -34,7 +33,7 @@ public class Gebruiker {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idGebruiker")
 	public Integer getIdGebruiker() {
 		return idGebruiker;
@@ -62,7 +61,7 @@ public class Gebruiker {
 		this.achternaam = achternaam;
 	}
 
-	@Column(name="email", nullable = false, length = 100)
+	@Column(name="email", nullable = false, length = 100, unique=true)
 	public String getEmail() {
 		return email;
 	}
@@ -87,7 +86,5 @@ public class Gebruiker {
 
 	public void setBetalingsGegevens(BetalingsGegevens betalingsGegevens) {
 		this.betalingsGegevens = betalingsGegevens;
-	}
-
-	
+	}	
 }

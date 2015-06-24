@@ -5,16 +5,22 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="categorie")
 public class Categorie {
 	private Integer idCategorie;
 	private String categorieNaam;
-	private Categorie subCategorie;
+	private Categorie parentCategorie;
 	private Set<Categorie> sub = new HashSet<Categorie>();
 	
 	public Categorie(String categorieNaam) {
@@ -26,7 +32,7 @@ public class Categorie {
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idCategorie")
 	public Integer getIdCategorie() {
 		return idCategorie;
@@ -46,16 +52,16 @@ public class Categorie {
 	}
 
 	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name="idSubCategorie")
-	public Categorie getSubCategorie() {
-		return subCategorie;
+	@JoinColumn(name="parentCategorie")
+	public Categorie getParentCategorie() {
+		return parentCategorie;
 	}
 
-	public void setSubCategorie(Categorie subCategorie) {
-		this.subCategorie = subCategorie;
+	public void setParentCategorie(Categorie parentCategorie) {
+		this.parentCategorie = parentCategorie;
 	}
 
-	@OneToMany(mappedBy="subCategorie")
+	@OneToMany(mappedBy = "parentCategorie" ,fetch =FetchType.EAGER)
 	public Set<Categorie> getSub() {
 		return sub;
 	}
@@ -63,6 +69,4 @@ public class Categorie {
 	public void setSub(Set<Categorie> sub) {
 		this.sub = sub;
 	}
-	
-	
 }

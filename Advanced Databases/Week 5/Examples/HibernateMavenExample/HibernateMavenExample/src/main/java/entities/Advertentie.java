@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,12 +19,8 @@ public class Advertentie {
 	private Integer startPrijs;
 	private boolean actief;
 	private String startDatum;
-	//private Integer idGebruiker;
-	//private String categorieNaam;
 	private Gebruiker gebruiker;
-	//private Bod bod;
     private Categorie categorie;
-	//private AdvertentieReactie advertentieReactie;
 	
 	public Advertentie() {
 	}
@@ -40,7 +37,7 @@ public class Advertentie {
 		this.categorie = categorie;
 	}
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idAdvertentie")
 	public Integer getIdAdvertentie() {
 		return idAdvertentie;

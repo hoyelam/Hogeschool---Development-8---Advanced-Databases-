@@ -1,9 +1,11 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +21,12 @@ public class AdvertentieReactie {
 	public AdvertentieReactie() {
 	}
 
-	public AdvertentieReactie(String tekst, String datum, Integer idAdvertentie) {
+	public AdvertentieReactie(String tekst, String datum, Advertentie advertentie, Gebruiker gebruiker) {
 		this();
 		this.tekst = tekst;
 		this.datum = datum;
+		this.advertentie = advertentie;
+		this.gebruiker = gebruiker;
 	}
 	
 	@Id
@@ -54,6 +58,7 @@ public class AdvertentieReactie {
 		this.datum = datum;
 	}
 
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Advertentie getAdvertentie() {
 		return advertentie;
 	}
@@ -62,6 +67,7 @@ public class AdvertentieReactie {
 		this.advertentie = advertentie;
 	}
 
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Gebruiker getGebruiker() {
 		return gebruiker;
 	}
